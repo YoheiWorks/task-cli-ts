@@ -18,4 +18,4 @@ function createTask(title: TaskTitle): Task {
     }
 }
 
-export { type Task, createTask};
+export { type Task, type TaskId, type TaskTitle, type TaskStatus, createTask };
