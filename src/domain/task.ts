@@ -17,3 +17,5 @@ function createTask(title: Title): Task {
         status: "open",
     }
 }
+
+export { type Task, createTask};
