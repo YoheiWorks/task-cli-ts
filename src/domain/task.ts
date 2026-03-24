@@ -1,16 +1,16 @@
 type Task = {
-    id: Id;
-    title: Title;
-    status: Status;
+    id: TaskId;
+    title: TaskTitle;
+    status: TaskStatus;
 }
 
-type Id = string;
+type TaskId = string;
 
-type Title = string;
+type TaskTitle = string;
 
-type Status = "open" | "completed";
+type TaskStatus = "open" | "completed";
 
-function createTask(title: Title): Task {
+function createTask(title: TaskTitle): Task {
     return {
         id: crypto.randomUUID(),
         title,
