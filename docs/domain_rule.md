@@ -1,0 +1,4 @@
+- タイトルは空文字・空白のみを禁止
+- createTask は不正タイトルなら失敗
+- completeTask は open -> completed のみ成功
+- reopenTask は completed -> open のみ成功
