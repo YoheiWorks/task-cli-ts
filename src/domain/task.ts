@@ -1,5 +1,7 @@
 type Task = {
     id: string;
     title: string;
-    status: "open" | "completed";
+    status: Status;
 }
+
+type Status = "open" | "completed";
