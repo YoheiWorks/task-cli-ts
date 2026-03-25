@@ -81,11 +81,11 @@ function completeTask(task: Task): Result<Task, TaskAlreadyCompletedError> {
     };
 }
 
-function reopenTask(task: Task): Result<Task, Error> {
+function reopenTask(task: Task): Result<Task, TaskAlreadyOpenError> {
     if (task.status === "open") {
         return {
             kind: "error",
-            error: new Error("タスクはすでにオープン状態です。")
+            error: new TaskAlreadyOpenError()
         };
     }
 
