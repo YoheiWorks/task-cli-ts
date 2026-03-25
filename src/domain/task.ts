@@ -98,4 +98,17 @@ function reopenTask(task: Task): Result<Task, TaskAlreadyOpenError> {
     }
 }
 
-export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, InvalidTaskTitleError, TaskAlreadyCompletedError, TaskAlreadyOpenError, createTask, completeTask, reopenTask };
+export { 
+    type Task, 
+    type TaskId, 
+    type TaskTitle, 
+    type TaskStatus, 
+    type Result, 
+    TaskError, 
+    InvalidTaskTitleError, 
+    TaskAlreadyCompletedError, 
+    TaskAlreadyOpenError, 
+    createTask, 
+    completeTask, 
+    reopenTask 
+};
