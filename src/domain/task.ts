@@ -14,6 +14,15 @@ type Result<T, E extends Error> =
     { readonly kind: "ok"; readonly value: T}
     | { readonly kind: "error"; readonly error: E };
 
+class TaskError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "TaskError";
+
+        Object.setPrototypeOf(this, new.target.prototype);
+    }
+}
+
 class InvalidTaskTitleError extends Error {
     constructor() {
         super("タイトルが空文字・空白のみでは、タスクを作成できません。");
