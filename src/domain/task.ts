@@ -23,6 +23,15 @@ class InvalidTaskTitleError extends Error {
     }
 }
 
+class TaskAlreadyCompletedError extends Error {
+    constructor() {
+        super("タスクはすでに完了しています。");
+        this.name = "TaskAlreadyCompletedError";
+
+        Object.setPrototypeOf(this, TaskAlreadyCompletedError.prototype);
+    }
+}
+
 function createTask(title: TaskTitle): Result<Task, InvalidTaskTitleError> {
 
     if (!validateTaskTitle(title)) {
@@ -46,11 +55,11 @@ function validateTaskTitle(title: TaskTitle): boolean {
     return title.trim().length > 0;
 }
 
-function completeTask(task: Task): Result<Task, Error> {
+function completeTask(task: Task): Result<Task, TaskAlreadyCompletedError> {
     if (task.status === "completed") {
         return {
             kind: "error",
-            error: new Error("タスクはすでに完了しています。")
+            error: new TaskAlreadyCompletedError()
         };
     }
 
@@ -63,4 +72,4 @@ function completeTask(task: Task): Result<Task, Error> {
     };
 }
 
-export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, type InvalidTaskTitleError, createTask };
+export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, type InvalidTaskTitleError, createTask, completeTask };
