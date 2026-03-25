@@ -29,13 +29,13 @@ class InvalidTaskTitleError extends TaskError {
     }
 }
 
-class TaskAlreadyCompletedError extends Error {
+class TaskAlreadyCompletedError extends TaskError {
     constructor() {
         super("タスクはすでに完了しています。");
     }
 }
 
-class TaskAlreadyOpenError extends Error {
+class TaskAlreadyOpenError extends TaskError {
     constructor() {
         super("タスクはすでにオープン状態です。");
     }
