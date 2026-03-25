@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createTask, InvalidTaskTitleError } from "./task.js";
+import { completeTask, createTask, InvalidTaskTitleError, TaskAlreadyCompletedError } from "./task.js";
 
 describe("タスクの生成に関するテスト", () => {
     it ("複数文字数のタイトルでタスクを生成できる", () => {
@@ -54,6 +54,40 @@ describe("タスクの生成に関するテスト", () => {
         expect(result.kind).toBe("error");
         if (result.kind === "error") {
             expect(result.error).toBeInstanceOf(InvalidTaskTitleError);
+        }
+    });
+});
+
+describe("タスクの完了に関するテスト", () => {
+    it ("オープン状態のタスクを完了できる", () => {
+        const task = {
+            id: "task1",
+            title: "Test Task",
+            status: "open" as const
+        } as const;
+
+        const result = completeTask(task);
+
+        expect(result.kind).toBe("ok");
+        if (result.kind === "ok") {
+            expect(result.value.id).toBe(task.id);
+            expect(result.value.title).toBe(task.title);
+            expect(result.value.status).toBe("completed");
+        }
+    });
+
+    it ("すでに完了しているタスクを再度完了できない", () => {
+        const task = {
+            id: "task1",
+            title: "Test Task",
+            status: "completed" as const
+        } as const;
+
+        const result = completeTask(task);
+
+        expect(result.kind).toBe("error");
+        if (result.kind === "error") {
+            expect(result.error).toBeInstanceOf(TaskAlreadyCompletedError);
         }
     });
 });
