@@ -46,4 +46,21 @@ function validateTaskTitle(title: TaskTitle): boolean {
     return title.trim().length > 0;
 }
 
+function completeTask(task: Task): Result<Task, Error> {
+    if (task.status === "completed") {
+        return {
+            kind: "error",
+            error: new Error("タスクはすでに完了しています。")
+        };
+    }
+
+    return {
+        kind: "ok",
+        value: {
+            ...task,
+            status: "completed"
+        }
+    };
+}
+
 export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, type InvalidTaskTitleError, createTask };
