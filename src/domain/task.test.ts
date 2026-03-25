@@ -64,7 +64,7 @@ describe("タスクの完了に関するテスト", () => {
             id: "task1",
             title: "Test Task",
             status: "open" as const
-        } as const;
+        };
 
         const result = completeTask(task);
 
@@ -81,7 +81,7 @@ describe("タスクの完了に関するテスト", () => {
             id: "task1",
             title: "Test Task",
             status: "completed" as const
-        } as const;
+        };
 
         const result = completeTask(task);
 
@@ -98,7 +98,7 @@ describe("タスクの再オープンに関するテスト", () => {
             id: "task1",
             title: "Test Task",
             status: "completed" as const
-        } as const;
+        };
 
         const result = reopenTask(task);
 
@@ -115,7 +115,7 @@ describe("タスクの再オープンに関するテスト", () => {
             id: "task1",
             title: "Test Task",
             status: "open" as const
-        } as const;
+        };
 
         const result = reopenTask(task);
 
