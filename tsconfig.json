@@ -34,5 +34,6 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-  }
+  },
+  "include": ["src/**/**.ts"]
 }
