@@ -32,6 +32,15 @@ class TaskAlreadyCompletedError extends Error {
     }
 }
 
+class TaskAlreadyOpenError extends Error {
+    constructor() {
+        super("タスクはすでにオープン状態です。");
+        this.name = "TaskAlreadyOpenError";
+
+        Object.setPrototypeOf(this, TaskAlreadyOpenError.prototype);
+    }
+}
+
 function createTask(title: TaskTitle): Result<Task, InvalidTaskTitleError> {
 
     if (!validateTaskTitle(title)) {
