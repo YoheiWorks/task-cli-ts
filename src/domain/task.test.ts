@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeTask, createTask, InvalidTaskTitleError, TaskAlreadyCompletedError } from "./task.js";
+import { completeTask, createTask, InvalidTaskTitleError, reopenTask, TaskAlreadyCompletedError, TaskAlreadyOpenError } from "./task.js";
 
 describe("タスクの生成に関するテスト", () => {
     it ("複数文字数のタイトルでタスクを生成できる", () => {
@@ -88,6 +88,40 @@ describe("タスクの完了に関するテスト", () => {
         expect(result.kind).toBe("error");
         if (result.kind === "error") {
             expect(result.error).toBeInstanceOf(TaskAlreadyCompletedError);
+        }
+    });
+});
+
+describe("タスクの再オープンに関するテスト", () => {
+    it ("完了状態のタスクを再オープンできる", () => {
+        const task = {
+            id: "task1",
+            title: "Test Task",
+            status: "completed" as const
+        } as const;
+
+        const result = reopenTask(task);
+
+        expect(result.kind).toBe("ok");
+        if (result.kind === "ok") {
+            expect(result.value.id).toBe(task.id);
+            expect(result.value.title).toBe(task.title);
+            expect(result.value.status).toBe("open");
+        }
+    });
+
+    it ("すでにオープン状態のタスクを再度オープンできない", () => {
+        const task = {
+            id: "task1",
+            title: "Test Task",
+            status: "open" as const
+        } as const;
+
+        const result = reopenTask(task);
+
+        expect(result.kind).toBe("error");
+        if (result.kind === "error") {
+            expect(result.error).toBeInstanceOf(TaskAlreadyOpenError);
         }
     });
 });
