@@ -72,4 +72,21 @@ function completeTask(task: Task): Result<Task, TaskAlreadyCompletedError> {
     };
 }
 
-export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, type InvalidTaskTitleError, createTask, completeTask };
+function reopenTask(task: Task): Result<Task, Error> {
+    if (task.status === "open") {
+        return {
+            kind: "error",
+            error: new Error("タスクはすでにオープン状態です。")
+        };
+    }
+
+    return {
+        kind: "ok",
+        value: {
+            ...task,
+            status: "open"
+        }
+    }
+}
+
+export { type Task, type TaskId, type TaskTitle, type TaskStatus, type Result, type InvalidTaskTitleError, createTask, completeTask, reopenTask };
