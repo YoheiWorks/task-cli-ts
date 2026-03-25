@@ -17,36 +17,27 @@ type Result<T, E extends Error> =
 class TaskError extends Error {
     constructor(message: string) {
         super(message);
-        this.name = "TaskError";
+        this.name = new.target.name;
 
         Object.setPrototypeOf(this, new.target.prototype);
     }
 }
 
-class InvalidTaskTitleError extends Error {
+class InvalidTaskTitleError extends TaskError {
     constructor() {
         super("タイトルが空文字・空白のみでは、タスクを作成できません。");
-        this.name = "InvalidTaskTitleError";
-
-        Object.setPrototypeOf(this, InvalidTaskTitleError.prototype);
     }
 }
 
 class TaskAlreadyCompletedError extends Error {
     constructor() {
         super("タスクはすでに完了しています。");
-        this.name = "TaskAlreadyCompletedError";
-
-        Object.setPrototypeOf(this, TaskAlreadyCompletedError.prototype);
     }
 }
 
 class TaskAlreadyOpenError extends Error {
     constructor() {
         super("タスクはすでにオープン状態です。");
-        this.name = "TaskAlreadyOpenError";
-
-        Object.setPrototypeOf(this, TaskAlreadyOpenError.prototype);
     }
 }
 
