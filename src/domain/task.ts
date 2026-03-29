@@ -75,9 +75,6 @@ export {
     type TaskId,
     type TaskTitle,
     type TaskStatus,
-    InvalidTaskTitleError,
-    TaskAlreadyCompletedError,
-    TaskAlreadyOpenError,
     createTask,
     completeTask,
     reopenTask

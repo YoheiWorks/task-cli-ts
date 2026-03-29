@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { completeTask, createTask, InvalidTaskTitleError, reopenTask, TaskAlreadyCompletedError, TaskAlreadyOpenError } from "./task.js";
+import { completeTask, createTask, reopenTask } from "./task.js";
+import { InvalidTaskTitleError, TaskAlreadyCompletedError, TaskAlreadyOpenError } from "#domain/task-errors.js";
 
 describe("タスクの生成に関するテスト", () => {
     it ("複数文字数のタイトルでタスクを生成できる", () => {
