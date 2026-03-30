@@ -1,5 +1,6 @@
 import type { Result } from "#domain/result.js";
-import { reopenTask, type Task, type TaskId } from "#domain/task.js";
+import { reopenTask, type Task } from "#domain/task.js";
+import type { ReopenTaskInput } from "#input/reopen-task-input.js";
 import type { TaskRepository } from "#usecase/task-repository.js";
 import type { ReopenTaskUseCaseError } from "#usecase/usecase-errors.js";
 
@@ -10,7 +11,7 @@ export class ReopenTaskUseCase {
         this.#repository = repository;
     }
 
-    execute(taskId: TaskId): Result<Task, ReopenTaskUseCaseError> {
+    execute({ taskId }: ReopenTaskInput): Result<Task, ReopenTaskUseCaseError> {
         const findResult = this.#repository.findById(taskId);
         if (findResult.kind === "error") {
             return findResult;

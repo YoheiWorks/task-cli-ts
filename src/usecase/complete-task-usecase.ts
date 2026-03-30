@@ -1,5 +1,6 @@
 import type { Result } from "#domain/result.js";
-import { completeTask, type Task, type TaskId } from "#domain/task.js";
+import { completeTask, type Task } from "#domain/task.js";
+import type { CompleteTaskInput } from "#input/complete-task-input.js";
 import type { TaskRepository } from "#usecase/task-repository.js";
 import type { CompleteTaskUseCaseError } from "#usecase/usecase-errors.js";
 
@@ -10,7 +11,7 @@ export class CompleteTaskUseCase {
         this.#repository = repository;
     }
 
-    execute(taskId: TaskId): Result<Task, CompleteTaskUseCaseError> {
+    execute({ taskId }: CompleteTaskInput): Result<Task, CompleteTaskUseCaseError> {
         const findResult = this.#repository.findById(taskId);
         if (findResult.kind === "error") {
             return findResult;

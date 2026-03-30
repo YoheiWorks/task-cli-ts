@@ -1,7 +1,8 @@
 import type { Result } from "#domain/result.js";
 import { createTask, type Task } from "#domain/task.js";
-import type { TaskRepository } from "./task-repository.js";
-import type { CreateTaskUseCaseError } from "./usecase-errors.js";
+import type { CreateTaskInput } from "#input/create-task-input.js";
+import type { TaskRepository } from "#usecase/task-repository.js";
+import type { CreateTaskUseCaseError } from "#usecase/usecase-errors.js";
 
 export class CreateTaskUseCase {
     #repository: TaskRepository;
@@ -10,7 +11,7 @@ export class CreateTaskUseCase {
         this.#repository = repository;
     }
 
-    execute(title: string): Result<Task, CreateTaskUseCaseError> {
+    execute({ title }: CreateTaskInput): Result<Task, CreateTaskUseCaseError> {
         const result = createTask(title);
         if (result.kind === "error") {
             return result;
